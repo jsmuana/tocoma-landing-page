@@ -202,6 +202,8 @@ section{padding:72px 0}
 .pack.reco{border:2.5px solid var(--yellow);box-shadow:0 0 44px rgba(245,191,8,.35)}
 .pack-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--green);color:var(--yellow);font-family:'Manrope',sans-serif;font-weight:800;font-size:10.5px;letter-spacing:1px;padding:6px 14px;border-radius:999px;white-space:nowrap}
 .pack.reco .pack-badge{background:var(--orange);color:#fff}
+.pack-img{width:100%;max-width:190px;margin:14px auto 4px;border-radius:12px}
+.pack.reco .pack-img{max-width:210px}
 .pack h3{font-size:17px;color:var(--green);margin:10px 0 4px;text-align:center}
 .pack .contents{text-align:center;font-size:13px;color:#5a6670;font-weight:700;margin-bottom:14px}
 .price-line{text-align:center;margin-bottom:6px}
@@ -690,25 +692,25 @@ const CONFIG = {
 
 const PACKS = [
   {
-    id:"starter", name:"Starter Wellness Pack", contents:"1 Box Tocoma · 7 Sachets",
+    id:"starter", name:"Starter Wellness Pack", contents:"1 Box Tocoma · 7 Sachets", img:"assets/pack_starter.jpg",
     price:800, old:950, badge:"BEST FOR FIRST-TIMERS", reco:false,
     points:["Shipping included — ₱800 delivered price","Cash on Delivery available","Approx. ₱114 per sachet lang","Perfect pang-try kung first time mo"],
     fine:"No hidden fees. Final price is ₱800 upon delivery.", cta:"ORDER STARTER PACK"
   },
   {
-    id:"combo", name:"Daily Wellness Combo", contents:"2 Tocoma + 2 Yeoubi Barley Pure",
+    id:"combo", name:"Daily Wellness Combo", contents:"2 Tocoma + 2 Yeoubi Barley Pure", img:"assets/pack_combo.jpg",
     price:1990, old:2350, badge:"⭐ RECOMMENDED", reco:true,
     points:["Shipping included — walang dagdag bayad","Cash on Delivery available","Wellness product combo — Tocoma + Barley","Best for consistent daily routine"],
     fine:"No hidden fees. Final price is ₱1,990 upon delivery.", cta:"GET DAILY COMBO"
   },
   {
-    id:"family", name:"Family Wellness Pack", contents:"6 Tocoma + 3 Yeoubi Barley Pure",
+    id:"family", name:"Family Wellness Pack", contents:"6 Tocoma + 3 Yeoubi Barley Pure", img:"assets/pack_family.jpg",
     price:4990, old:5850, badge:"BEST VALUE", reco:false,
     points:["Shipping included nationwide","Cash on Delivery available","9 total wellness products","Sulit for sharing sa buong pamilya"],
     fine:"No hidden fees. Final price is ₱4,990 upon delivery.", cta:"GET FAMILY PACK"
   },
   {
-    id:"ultimate", name:"Ultimate Wellness Bundle", contents:"12 Tocoma + 6 Yeoubi Barley Pure",
+    id:"ultimate", name:"Ultimate Wellness Bundle", contents:"12 Tocoma + 6 Yeoubi Barley Pure", img:"assets/pack_ultimate.jpg",
     price:9990, old:11700, badge:"BULK BUYER OFFER", reco:false,
     points:["Shipping included nationwide","Cash on Delivery available","18 total wellness products","Para sa resellers at long-term users"],
     fine:"No hidden fees. Final price is ₱9,990 upon delivery.", cta:"GET ULTIMATE BUNDLE"
@@ -742,6 +744,7 @@ function renderPacks(){
   document.getElementById("packGrid").innerHTML = PACKS.map(p=>`
     <div class="pack ${p.reco?'reco':''} reveal">
       <div class="pack-badge">${p.badge}</div>
+      <img class="pack-img" src="${p.img}" alt="${p.name}" loading="lazy">
       <h3>${p.name}</h3>
       <div class="contents">${p.contents}</div>
       ${p.reco?'<div class="pack-timer">⏰ Promo ends in <span data-mini></span></div>':''}
@@ -809,7 +812,7 @@ function stepPackage(){
   mTitle.textContent = "Step 1 of 3 — Your Pack";
   mBody.innerHTML = `
     <div class="sel-pack">
-      <img src="assets/product_hero.jpg" alt="${p.name}">
+      <img src="${p.img}" alt="${p.name}">
       <div>
         <h4>${p.name}</h4>
         <div class="inc">${p.contents}</div>
@@ -929,6 +932,7 @@ function maybeUpsell(){
       <h3>Gusto Mo Bang I-Level Up ang Wellness Routine Mo?</h3>
       <p>Bago namin i-process ang <b>${cur.name}</b> mo — heto ang one-time upgrade offer, ngayon lang:</p>
       <div class="upsell-offer">
+        <img src="${up.img}" alt="${up.name}" style="max-width:170px;margin:0 auto 10px;border-radius:10px">
         <b>${up.name}</b>
         <div style="font-size:13.5px;color:#5a6670;margin-bottom:6px">${up.contents}</div>
         <span class="up-price">${peso(up.price)}</span>
